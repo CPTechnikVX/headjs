@@ -1,3 +1,6 @@
+ - New: Config var "assetTimeout" for resource loading timeout
+ - Load: remove unused code
+
 1.0.3 (2013-11-22)
  - New: Timeout added to resource loading
  - New: CSS callbacks now executed for all browsers
@@ -43,7 +46,7 @@
  - Fix: Prevent loading empty strings
    - https://github.com/headjs/headjs/pull/184
  - Fix: CSS classes getting bigger on successive resizes under Chrome
-   - https://github.com/headjs/headjs/issues/226 
+   - https://github.com/headjs/headjs/issues/226
  - Fix: Invalid regular expression for CSS detection
    - https://github.com/headjs/headjs/issues/255
  - Fix: callback failing to trigger under certain cirumstances

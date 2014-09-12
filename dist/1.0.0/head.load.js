@@ -1,4 +1,3 @@
-///#source 1 1 /src/1.0.0/load.js
 /*! head.load - v1.0.3 */
 /*
  * HeadJS     The only script in your <HEAD>
@@ -19,8 +18,9 @@
         isDomReady,
 
         /*** public API ***/
-        headVar = win.head_conf && win.head_conf.head || "head",
-        api     = win[headVar] = (win[headVar] || function () { api.ready.apply(null, arguments); }),
+        headVar      = win.head_conf && win.head_conf.head || "head",
+        assetTimeout = win.head_conf && win.head_conf.assetTimeout || 7e3,
+        api          = win[headVar] = (win[headVar] || function () { api.ready.apply(null, arguments); }),
 
         // states
         PRELOADING = 1,
@@ -196,7 +196,7 @@
         });
     }
 
-    function preLoad(asset, callback) {
+    function preLoad(asset) {
         if (asset.state === undefined) {
 
             asset.state     = PRELOADING;
@@ -289,14 +289,14 @@
         // First populate the items array.
         // When allLoaded is called, all items will be populated.
         // Issue when lazy loaded, the callback can execute early.
-        each(args, function (item, i) {
+        each(args, function (item) {
             if (item !== callback) {
                 item             = getAsset(item);
                 items[item.name] = item;
             }
         });
 
-        each(args, function (item, i) {
+        each(args, function (item) {
             if (item !== callback) {
                 item = getAsset(item);
 
@@ -498,7 +498,7 @@
         // timout for asset loading
         asset.errorTimeout = win.setTimeout(function () {
             error({ type: "timeout" });
-        }, 7e3);
+        }, assetTimeout);
 
         // use insertBefore to keep IE from throwing Operation Aborted (thx Bryan Forbes!)
         var head = doc.head || doc.getElementsByTagName("head")[0];

@@ -1,4 +1,3 @@
-///#source 1 1 /src/1.0.0/core.js
 /*! head.core - v1.0.2 */
 /*
  * HeadJS     The only script in your <HEAD>
@@ -310,7 +309,6 @@
         win.attachEvent("onresize", onResize);
     }
 }(window));
-///#source 1 1 /src/1.0.0/css3.js
 /*! head.css3 - v1.0.0 */
 /*
  * HeadJS     The only script in your <HEAD>
