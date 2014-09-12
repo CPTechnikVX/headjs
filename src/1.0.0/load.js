@@ -195,7 +195,7 @@
         });
     }
 
-    function preLoad(asset, callback) {
+    function preLoad(asset) {
         if (asset.state === undefined) {
 
             asset.state     = PRELOADING;
@@ -288,14 +288,14 @@
         // First populate the items array.
         // When allLoaded is called, all items will be populated.
         // Issue when lazy loaded, the callback can execute early.
-        each(args, function (item, i) {
+        each(args, function (item) {
             if (item !== callback) {
                 item             = getAsset(item);
                 items[item.name] = item;
             }
         });
 
-        each(args, function (item, i) {
+        each(args, function (item) {
             if (item !== callback) {
                 item = getAsset(item);
 
