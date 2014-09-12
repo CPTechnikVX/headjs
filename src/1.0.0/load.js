@@ -18,8 +18,9 @@
         isDomReady,
 
         /*** public API ***/
-        headVar = win.head_conf && win.head_conf.head || "head",
-        api     = win[headVar] = (win[headVar] || function () { api.ready.apply(null, arguments); }),
+        headVar      = win.head_conf && win.head_conf.head || "head",
+        assetTimeout = win.head_conf && win.head_conf.assetTimeout || 7e3,
+        api          = win[headVar] = (win[headVar] || function () { api.ready.apply(null, arguments); }),
 
         // states
         PRELOADING = 1,
@@ -497,7 +498,7 @@
         // timout for asset loading
         asset.errorTimeout = win.setTimeout(function () {
             error({ type: "timeout" });
-        }, 7e3);
+        }, assetTimeout);
 
         // use insertBefore to keep IE from throwing Operation Aborted (thx Bryan Forbes!)
         var head = doc.head || doc.getElementsByTagName("head")[0];
