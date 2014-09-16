@@ -554,9 +554,14 @@
         if (isArray(key)) {
             var items = {};
 
+            // get all items
+            // if api.ready() in called in same iteration, a race condition is possible (reproduced in IE8)
             each(key, function (item) {
                 items[item] = assets[item];
+            });
 
+            // call ready for every key to set handlers
+            each(key, function (item) {
                 api.ready(item, function() {
                     if (allLoaded(items)) {
                         one(callback);
