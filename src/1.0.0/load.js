@@ -180,9 +180,12 @@
         items = items || assets;
 
         for (var name in items) {
-            if (items.hasOwnProperty(name) && items[name].state !== LOADED) {
+
+            // check against assets! Maybe loading of asset wasn't started yet
+            if ((typeof assets[name] !== 'object') || assets[name].state !== LOADED) {
                 return false;
             }
+
         }
 
         return true;
