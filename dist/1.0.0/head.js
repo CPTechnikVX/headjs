@@ -655,9 +655,12 @@
         items = items || assets;
 
         for (var name in items) {
-            if (items.hasOwnProperty(name) && items[name].state !== LOADED) {
+
+            // check against assets! Maybe loading of asset wasn't started yet
+            if ((typeof assets[name] !== 'object') || assets[name].state !== LOADED) {
                 return false;
             }
+
         }
 
         return true;
@@ -1029,9 +1032,14 @@
         if (isArray(key)) {
             var items = {};
 
+            // get all items
+            // if api.ready() in called in same iteration, a race condition is possible (reproduced in IE8)
             each(key, function (item) {
                 items[item] = assets[item];
+            });
 
+            // call ready for every key to set handlers
+            each(key, function (item) {
                 api.ready(item, function() {
                     if (allLoaded(items)) {
                         one(callback);
